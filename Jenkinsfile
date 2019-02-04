@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Install Client') {
       steps {
-        bat(script: 'powershell -File "C:\\Users\\turboci\\Desktop\\test-script.ps1"', returnStatus: true, returnStdout: true)
+        powershell(script: 'Write-Host "Test script starts" Write-Host "install turbo client" $ClientEditions = Get-ChildItem "\\\\s13\\Release\\Client" $installerPath = $ClientEditions[$ClientEditions.Length - 1].FullName+"\\Turbo-Plugin.exe" Write-Host "Installing client from $installerPath" & $installerPath --silent Write-Host "Installed Client with exit code $LASTEXITCODE" Write-Host "Turbo version:" & turbo version', returnStatus: true, returnStdout: true)
       }
     }
     stage('Build Image') {
