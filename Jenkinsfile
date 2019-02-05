@@ -4,6 +4,9 @@ pipeline {
     stage('Install Client') {
       steps {
         bat(script: 'powershell.exe -File "C:\\Users\\turboci\\Desktop\\test-script.ps1"', returnStatus: true, returnStdout: true, encoding: 'UTF-8')
+        powershell(script: '"C:\\\\Users\\\\turboci\\\\Desktop\\\\test-script.ps1"', returnStatus: true, returnStdout: true)
+        powershell(script: 'C:\\Users\\Desktop\\test-script.ps1', returnStatus: true, returnStdout: true)
+        powershell '"& C:\\Users\\turboci\\Desktop\\test-script.ps1"'
       }
     }
     stage('Build Image') {
