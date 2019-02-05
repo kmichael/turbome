@@ -4,12 +4,25 @@ pipeline {
     stage('Install Client') {
       steps {
         powershell(returnStatus: true, returnStdout: true, script: 'C:\\Users\\turboci\\Desktop\\test-script.ps1')
-        powershell(script: 'C:\\Users\\turboci\\Desktop\\test-script2.ps1', returnStatus: true, returnStdout: true, label: 'Write Output')
       }
     }
     stage('Build Image') {
-      steps {
-        bat(script: 'turbo build "C:\\Users\\turboci\\Desktop\\turbo.me" --overwrite', returnStatus: true, returnStdout: true)
+      parallel {
+        stage('Build Image') {
+          steps {
+            bat(script: 'turbo build "C:\\Users\\turboci\\Desktop\\turbo.me" --overwrite 2>&1', returnStatus: true, label: 'Redirect 2>&1 ReturnStatus')
+          }
+        }
+        stage('Return Nothing') {
+          steps {
+            bat(script: 'turbo build "C:\\Users\\turboci\\Desktop\\turbo.me" --overwrite', label: 'Return Nothing')
+          }
+        }
+        stage('') {
+          steps {
+            bat(script: 'turbo build "C:\\Users\\turboci\\Desktop\\turbo.me" --overwrite 2>&1', label: 'Only Redirect & return nothing')
+          }
+        }
       }
     }
     stage('Test image') {
