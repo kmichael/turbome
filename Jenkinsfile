@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Install Client') {
       steps {
-        powershell(script: '-File "C:\\Users\\turboci\\Desktop\\test-script.ps1"', returnStatus: true, returnStdout: true)
+        powershell(script: '"C:\\Users\\turboci\\Desktop\\test-script.ps1"', returnStatus: true, returnStdout: true)
       }
     }
     stage('Build Image') {
