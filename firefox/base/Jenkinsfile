@@ -1,0 +1,10 @@
+pipeline {
+  agent any
+  stages {
+    stage('Trigger remote build') {
+      steps {
+        powershell(returnStatus: true, script: 'D:\\Tools\\host-script.ps1')
+      }
+    }
+  }
+}
