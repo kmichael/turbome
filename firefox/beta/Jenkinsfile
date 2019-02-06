@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Trigger remote build') {
       steps {
-        powershell(returnStatus: true, script: 'C:\\Users\\turboci\\Desktop\\host-script.ps1')
+        powershell(returnStatus: true, script: 'D:\\Tools\\host-script.ps1 "firefox\beta\turbo.me")
       }
     }
   }
